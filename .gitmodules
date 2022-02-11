@@ -1,0 +1,9 @@
+[submodule "lib/SFML"]
+    path = lib/SFML
+    url = https://github.com/SFML/SFML.git
+[submodule "lib/jsoncpp"]
+    path = lib/jsoncpp
+    url = https://github.com/open-source-parsers/jsoncpp.git
+[submodule "lib/tinyxml"]
+    path = lib/tinyxml
+    url = https://github.com/leethomason/tinyxml2.git
