@@ -3,7 +3,7 @@
 **External Libraries**
 - [SFML](https://www.sfml-dev.org/)
 - [JsonCpp](https://github.com/open-source-parsers/jsoncpp.git)
-- [Python](https://www.python.org/)
+- [TinyXML](https://sourceforge.net/projects/tinyxml/)
 
 **Tools Used**
 - [Visual Studio Code](https://code.visualstudio.com/)
