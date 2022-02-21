@@ -3,19 +3,26 @@
 #include <ctime>
 #include <fstream>
 
+#include "Logger.h"
+
 #include "Util/GameUtils.h"
+#include "Util/SfmlUtils.h"
 
 Game::Game()
 {
+    Logger::debug("Initializing Game", __FILE__, __LINE__);
     data.state = INTRO;
     data.levelNumber = 1;
 
+    Logger::log("Initializing Window");
     window = new sf::RenderWindow(sf::VideoMode(800, 640), "I fell down the stairs while using Visual Studio Code and this is the game that showed up", sf::Style::Close | sf::Style::Titlebar);
     window->setFramerateLimit(60);
 
+    Logger::log("Loading Resources");
     if (!loadResources(resources))
         quit(1);
 
+    Logger::log("Initializing Camera");
     camera.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
 }
 
@@ -54,6 +61,16 @@ void Game::pollWindowEvents()
         case sf::Event::MouseMoved:
             input.mousePos.x = event.mouseMove.x;
             input.mousePos.y = event.mouseMove.y;
+            break;
+
+        case sf::Event::MouseEntered:
+            break;
+
+        case sf::Event::MouseLeft:
+            break;
+
+        default:
+            Logger::warning("Event type " + std::to_string(event.type) + " is unhandled (" + getEventName(event.type) + ")", __FILE__, __LINE__);
             break;
         }
     }

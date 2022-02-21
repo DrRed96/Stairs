@@ -1,5 +1,6 @@
 #include "Menu.h"
 
+#include "Logger.h"
 #include "Util/GameUtils.h"
 
 Menu::Menu(sf::Music& p_menuTheme, sf::Music& p_rickroll)
@@ -13,6 +14,7 @@ Menu::~Menu()
 
 void Menu::init(Game& p_game, sf::Texture& p_backgroundTexture, sf::Font& p_font)
 {
+    Logger::debug("Initializing menu", __FILE__, __LINE__);
     m_backgroundTexture = p_backgroundTexture;
     m_background.setTexture(p_backgroundTexture);
     
@@ -69,11 +71,12 @@ void Menu::init(Game& p_game, sf::Texture& p_backgroundTexture, sf::Font& p_font
     m_aboutText.setFillColor(sf::Color(255, 255, 255, 255));
     m_aboutText.setCharacterSize(24);
     m_aboutText.setStyle(sf::Text::Bold);
-    m_aboutText.setString("Made by Cal (DrRed96)\n\nLanguages: C/C++, Python\n\nLibraries: SFML, Python C API, JsonCpp\n\nTools: Microsoft Visual Studio Code, MinGW GCC, GNU Make\n\nThis is not an open source project so don't ask for the source code.\nHowever feel free to distribute it.");
+    m_aboutText.setString("Made by Cal (DrRed96)\n\nRepo: https://github.com/DrRed96/Stairs.git\n\nLanguages: C/C++, Python\n\nLibraries: SFML, Python C API, JsonCpp\n\nTools: Microsoft Visual Studio Code, MinGW GCC, GNU Make.");
     m_aboutText.setPosition(sf::Vector2f(50, 270));
 
     m_menuTheme.setVolume(50);
     m_menuTheme.play();
+    Logger::debug("Initialized menu", __FILE__, __LINE__);
 }
 
 void Menu::update(Game& p_game)
@@ -85,6 +88,7 @@ void Menu::update(Game& p_game)
             m_singleplayerButton.setFillColor(sf::Color(rand() % 256, rand() % 256, rand() % 256, 255));
             if (p_game.input.mouseButton[sf::Mouse::Left])
             {
+                Logger::debug("Menu button 1 was pressed", __FILE__, __LINE__);
                 if (m_rickroll.getStatus() != sf::Music::Status::Playing)
                 {
                     m_menuTheme.stop();
@@ -106,6 +110,7 @@ void Menu::update(Game& p_game)
             m_multiplayerButton.setFillColor(sf::Color(rand() % 256, rand() % 256, rand() % 256, 255));
             if (p_game.input.mouseButton[sf::Mouse::Left])
             {
+                Logger::debug("Menu button 2 was pressed", __FILE__, __LINE__);
                 if (m_menuTheme.getStatus() == sf::Music::Status::Playing) m_menuTheme.stop();
                 if (m_rickroll.getStatus() == sf::Music::Status::Playing) m_rickroll.stop();
                 p_game.data.state = GAME;
@@ -121,6 +126,7 @@ void Menu::update(Game& p_game)
             m_aboutButton.setFillColor(sf::Color(rand() % 256, rand() % 256, rand() % 256, 255));
             if (p_game.input.mouseButton[sf::Mouse::Left])
             {
+                Logger::debug("Menu button 3 was pressed", __FILE__, __LINE__);
                 m_aboutMenu = true;
             }
         }
@@ -134,6 +140,7 @@ void Menu::update(Game& p_game)
             m_exitButton.setFillColor(sf::Color(rand() % 256, rand() % 256, rand() % 256, 255));
             if (p_game.input.mouseButton[sf::Mouse::Left])
             {
+                Logger::debug("Menu button 4 was pressed", __FILE__, __LINE__);
                 p_game.window->close();
             }
         }
@@ -149,6 +156,7 @@ void Menu::update(Game& p_game)
             m_backButton.setFillColor(sf::Color(rand() % 256, rand() % 256, rand() % 256, 255));
             if (p_game.input.mouseButton[sf::Mouse::Left])
             {
+                Logger::debug("Menu button 5 was pressed", __FILE__, __LINE__);
                 m_aboutMenu = false;
             }
         }

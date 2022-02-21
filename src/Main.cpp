@@ -2,41 +2,38 @@
 #include <cstdio>
 #include <SFML/Graphics.hpp>
 
+#include "Logger.h"
+#include "Game.h"
 #include "Loops.h"
 #include "Util/GameUtils.h"
 #include "Util/OsWindowsUtils.h"
 #include "Util/Structs.h"
 #include "Util/WindowUtils.h"
 
-#include "Game.h"
-
 int main(int argc, char** argv)
 {
-    Game game;
-
-    srand(time(0));
-
-    bool showConsole = false;
-
-    if (argc > 1)
+    for (int i = 1; i < argc; i++)
     {
-        printf("Parsing arguments\n");
-        for (int i = 1; i < argc; ++i)
-        {
-            std::string argument = std::string(argv[i]);
-            if (argument == "-skipmenu")
-            {
-                game.data.state = GAME;
-            }
+        std::string arg = std::string(argv[i]);
 
-            if (argument == "-showconsole")
-            {
-                showConsole = true;
-            }
+        if (arg == "--debug" || arg == "-d")
+        {
+            Logger::debugMode = true;
         }
+
     }
 
-    displayConsole(showConsole);
+    if (!Logger::debugMode)
+    {
+        displayConsole(false);
+    }
+    else
+    {
+        Logger::debug("Debug is enabled", __FILE__, __LINE__);
+    }
+
+    srand(time(NULL));
+    Game game;
 
     while (game.window->isOpen())
     {
@@ -63,5 +60,6 @@ int main(int argc, char** argv)
         }
     }
 
+    Logger::saveLogs();
     return 0;
 }

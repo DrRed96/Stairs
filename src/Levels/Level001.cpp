@@ -11,7 +11,7 @@ void level001(Game& p_game)
     player.init(p_game.resources.textures["sample_player"], p_game.resources.textures["sample_player"]);
     player.setPos(sf::Vector2f(p_game.window->getSize().x/2, 100));
 
-    Bob bob(1.f, 1.f, 0.8f);
+    Bob bob(1.f, 0.65f, 0.8f);
     bob.init(p_game.resources.textures["bob"], p_game.resources.textures["bob"]);
     bob.setPos(sf::Vector2f(p_game.window->getSize().x-60, 100));
 
@@ -27,8 +27,6 @@ void level001(Game& p_game)
         player.update(level, p_game.input);
         setCameraPositionRelativeToSpriteAndLevel(p_game, player.getHitbox(), level);
         bob.update(level, player);
-
-        printf("%d\n", bob.isOnScreen(p_game));
 
         p_game.window->clear(sf::Color(0xDDFFFFFF));
         level.draw(p_game.window);

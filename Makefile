@@ -26,7 +26,7 @@ all: build
 
 run: build
 	@printf "\\033[92mRunning executable\\033[0m\\n"
-	@cd bin && ./Stairs
+	@cd bin && ./Stairs --debug
 
 build: $(OBJ) $(RES)
 	@printf "\\033[92mBuilding Executable\\033[0m\\n"

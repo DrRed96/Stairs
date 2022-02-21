@@ -5,6 +5,8 @@
 #include <fstream>
 #include <SFML/Audio.hpp>
 
+#include "Logger.h"
+
 GameData loadGameDataFromJson(std::string filePath)
 {
     GameData gameData;
@@ -65,5 +67,6 @@ void stopAllMusic(Resources& p_resources)
 
 void quit(int p_code)
 {
+    Logger::saveLogs();
     exit(p_code);
 }
